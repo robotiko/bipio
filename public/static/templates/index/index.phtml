@@ -1,0 +1,344 @@
+<script data-main="static/js/index-main" src="/static/js/vendor/require/require.js"></script>
+<div id="atf" class="cta-section">  
+    <div class="container">
+        <div class="row ">
+            <div class="span6">
+                <h3>A Personal API for Email and Web Apps</h3>
+                <p>
+                  BipIO gives you the power to rapidly create workflows with the cloud 
+                  components you already love, no programming required.</p>
+            </div>
+            <div class="span6">
+                <div id="particlebox1" class="chrome-flair">
+                    <div class="particles"></div>
+                </div>
+                <div id="particlebox3" class="chrome-flair">
+                    <div class="particles"></div>
+                </div>
+
+                <p class="lead arrow_box middle">We're almost beta, secure an early experience</p>
+                <div id="sign-up" class="span6" style="text-align:center;margin-left:0px; height:60px;">
+                    <input style="width:80%" type="text" data-success="Thanks! We'll reach you soon" data-fail="Something went wrong, please try again later" class="input-xlarge pull-left" id="email_address" name="email_address" placeholder="Your email address here">
+                    <input style="margin-bottom: 3rem;" type="button" class="btn btn-success btn-small pull-right" id="bip-reserve" data-bip-path="<?php echo $this->bipPath; ?>" value="Reserve" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="glance" class="cta-section">
+    <div class="container">
+        <div class="row" id="features">
+            <div class="feature span3 divider bg-purple">
+                <div class="featureicon"><i class="icon-hand-up"></i></div>
+                <h4 class="border-purple">Drag'n'Drop</h4>
+                <p>
+                    Built from the ground up with busy people in mind, automating
+                    your favorite cloud workflows is a simple gesture.
+                </p>
+            </div>
+            <div class="feature span3 divider bg-orange">
+                <div class="featureicon"><i class="icon-cogs"></i></div>
+                <h4 class="border-orange">Email, Events, WebHooks</h4>
+
+                <p>
+                    Bips are ideal for creating email addresses, integrating services
+                    or prototyping and backing your next application.
+                </p>
+            </div>
+            <div class="feature span3 bg-red">
+                <div class="featureicon"><i class="icon-github"></i></div>
+                <h4 class="border-red">Developer Friendly</h4>
+                <p>
+                    BipIO is <a href="https://github.com/bipio-server">Open Source</a>,
+                    documented and full featured, so go ahead and experiment!
+                </p>
+            </div>
+            <div class="feature span3 divider bg-green">
+                <div class="featureicon"><i class="icon-group"></i></div>
+                <h4 class="border-green">Community Supported</h4>
+                <p>
+                    Contribute your Bip configs to the community for
+                    1-click installs, or subscribe to federated
+                    content feeds around the topics you love.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="integrate" class="cta-section">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h3>Rapid Integrations, Community Leverage</h3>
+                <p>
+                    Bipio solves the pain of having to skill-up or outsource cloud integration
+                    expertise to get your work done.  Moving files between services and maintaining
+                    the same persona and messaging across all your social networks can be tedious,
+                    time consuming and expensive.  Bipio helps you strip down internet walled gardens
+                    and make it an Internet of Things that Matter To You.
+                    <br/><br/>
+                    Service integrations are drag'n'drop easy.  They're fun, efficient, intuitive and 
+                    automatic, just like it should be!  Bipio is an open source, fully documented platform, so get cracking
+                    with your personal app in the fastest way possible.  If you're an integrations 
+                    pro, contribute your configurations back to the community for 1 click installs 
+                    by the people that need it most.
+
+                    <br/><br/>
+                    The cloud is a vast and powerful beast, it's now yours to command. Be empowered.
+                </p>
+            </div>
+            <div class="span6">
+                <iframe src="//player.vimeo.com/video/75737537?loop=1&autoplay=1" width="500" height="270" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- div id="pods" class="cta-section">
+    <div class="container">
+        <div class="row">
+            <div class="span6 middle">
+                <h3>Supported Services <small>
+                    <span class="label label-success">
+                      <a href="/docs/pods" >
+                        <i class="icon-plus-sign"></i> MORE...
+                      </a>
+                    </span>
+                  </small></h3>
+
+                <nav id="pod-list-doc" class="hub-list row ">
+                    <div class="span2 pod-select" data-pod="email">
+                        <div class="hub ">
+                            <a href="/docs/pods/email">
+                                <img src="/static/img/channels/32/color/email.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Email</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="mailchimp">
+                        <div class="hub ">
+                            <a href="/docs/pods/mailchimp">
+                                <img src="/static/img/channels/32/color/mailchimp.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">MailChimp</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="dropbox">
+                        <div class="hub ">
+                            <a href="/docs/pods/dropbox">
+                                <img src="/static/img/channels/32/color/dropbox.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Dropbox</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="facebook">
+                        <div class="hub ">
+                            <a href="/docs/pods/facebook">
+                                <img src="/static/img/channels/32/color/facebook.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Facebook</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="google">
+                        <div class="hub ">
+                            <a href="/docs/pods/google">
+                                <img src="/static/img/channels/32/color/google.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Google</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="imgur">
+                        <div class="hub ">
+                            <a href="/docs/pods/imgur">
+                                <img src="/static/img/channels/32/color/imgur.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Imgur</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="soundcloud">
+                        <div class="hub ">
+                            <a href="/docs/pods/soundcloud">
+                                <img src="/static/img/channels/32/color/soundcloud.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Soundcloud</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="flickr">
+                        <div class="hub ">
+                            <a href="/docs/pods/flickr">
+                                <img src="/static/img/channels/32/color/flickr.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Flickr</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="twilio">
+                        <div class="hub ">
+                            <a href="/docs/pods/twilio">
+                                <img src="/static/img/channels/32/color/twilio.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Twilio</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="twitter">
+                        <div class="hub ">
+                            <a href="/docs/pods/twitter">
+                                <img src="/static/img/channels/32/color/twitter.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Twitter</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="zoho">
+                        <div class="hub ">
+                            <a href="/docs/pods/zoho">
+                                <img src="/static/img/channels/32/color/zoho.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Zoho</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>      <div class="span2 pod-select" data-pod="syndication">
+                        <div class="hub ">
+                            <a href="/docs/pods/syndication">
+                                <img src="/static/img/channels/32/color/syndication.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Syndication</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="span2 pod-select" data-pod="embedly">
+                        <div class="hub ">
+                            <a href="/docs/pods/embedly">
+                                <img src="/static/img/channels/32/color/embedly.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Embedly</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="span2 pod-select" data-pod="tumblr">
+                        <div class="hub ">
+                            <a href="/docs/pods/tumblr">
+                                <img src="/static/img/channels/32/color/tumblr.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Tumblr</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="span2 pod-select" data-pod="todoist">
+                        <div class="hub ">
+                            <a href="/docs/pods/todoist">
+                                <img src="/static/img/channels/32/color/todoist.png" alt="" class="hub-icon hub-icon-32">
+                                <strong class="name">Todoist</strong>
+                                <span class="note"></span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="span6">
+                <h3 class="middle">Dynamic Endpoints</h3>
+                <div class="row" id="bip-c">
+                    <div class="span3">
+                        <h4>Bips have neat characteristics</h4>
+                        <blockquote>
+                            <h4><i class="icon-time"></i> <i class="icon-heart"></i> <i class="icon-play"></i> <i class="icon-pause"></i></h4>
+                            auto-expire over time or #impressions. Pause or Play.
+                            <h4><i class="icon-code-fork"></i> dynamic</h4> bips can be updated at any time, even when live
+                            <h4><i class="icon-link"></i> faithful</h4> authenticated messaging
+                        </blockquote>
+                    </div>
+                    <div class="span3">
+                        <h4>and come in 3 flavors</h4>
+                        <blockquote>
+                            <h4><img src="/static/img/channels/32/color/bip_smtp.png"/> smtp</h4> to moderate incoming email
+                            <h4><img src="/static/img/channels/32/color/bip_http.png"/> http</h4> for powering your app
+                            <h4><img src="/static/img/channels/32/color/bip_trigger.png"/> trigger</h4> tasks, content syncs, alerts
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div -->
+
+<!-- div id="pricing" class="cta-section">
+    <div class="container">
+        <h3>Pricing</h3>
+        <div class="row">
+            <div class="span4">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <span class="amount">Free</span>
+                            <span class="period label label-success">forever</span>
+                        </div>
+                        <div class="separator ">
+                            <h3>DIY</h3>
+                            <strong><a href="https://github.com/bipio-server">Open Source</a></strong>
+                        </div>
+                        <div class="options">
+                            <ul class="unstyled">
+                                <li><strong>Non-Commercial GPLv3</strong> License </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <span class="amount">Free</span>
+                            <span class="period label label-success">beta</span>
+                        </div>
+                        <div class="separator ">
+                            <h3>Hosted</h3>
+                        </div>
+                        <div class="options">
+                            <ul class="unstyled">
+                                <li><strong>Unlimited</strong> Bips and Channels</li>
+                                <li><strong>Unlimited</strong> Custom Domains</li>
+                                <li><strong>1Gb/mo</strong> Data Transfer</li>
+                                <li><strong>1Gb/mo</strong> Burstable Storage</li>
+                                <li><strong>Limited</strong> Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <span class="amount">Reach Us</span>
+                            <span class="period label label-success">
+                                <a href="mailto:enquiries@cloudspark.com.au">
+                                    <i class="icon-envelope"></i>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="separator ">
+                            <h3>Partner</h3>
+                        </div>
+                        <div class="options">
+                            <ul class="unstyled">
+                                <li><strong>Unlimited</strong> Bips and Channels</li>
+                                <li><strong>Unlimited</strong> Custom Domains</li>
+                                <li><strong>?</strong> Data Transfer & Storage</li>
+                                <li><strong>Personal</strong> Support and Expertise</li>
+                                <li><strong>Commercial OEM</strong> License</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div -->
+

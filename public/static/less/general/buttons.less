@@ -1,0 +1,98 @@
+.btn-row .btn + .btn { margin-left: 1.2rem; }
+.btn { display: inline-block; }
+
+.btn-block { 
+	display: block; 
+	width: 100%;
+	text-align: center;
+}
+	
+// Disabled state
+.btn.disabled, .btn[disabled] {
+    cursor: default;
+    background-image: none;
+    .opacity(65);
+    .box-shadow(none);
+}
+
+// Core
+.btn {
+	font-size: 1.4rem;
+	line-height: 1.3em;
+	font-weight: 700;
+	text-decoration: none !important;
+	padding: .8rem 1.6rem;
+	border: 1px solid transparent;
+	.border-radius(5px);
+	
+	i { margin: 0 .4rem 0 0; }
+	.icon-caret-down { margin-right: 0; }
+}
+
+// Sizes
+.btn-small {
+	font-size: 1.2rem;
+	padding: .6rem 1.4rem;
+	.border-radius(4px);
+}
+
+.btn-mini {
+	font-size: 1.1rem;
+	padding: .4rem 1.2rem;
+	.border-radius(2px);
+}
+
+.btn-micro {
+	font-size: 1.1rem;
+	padding: .2rem .4rem;
+	.border-radius(2px);
+}
+
+// Colors
+.btn { .makeButton(#d0e4e8, #a4b4b6, @textColor); }
+.btn-primary { .makeButton(#00a7b6, #0095a5, @white); }
+.btn-success { .makeButton(#76d668, #52ab46, @white); }
+.btn-danger { .makeButton(#bf5656, #993636, @white); }
+
+	// Active States
+	.btn.active, .open > .btn { .makeButton(#d0e4e8, #a4b4b6, @textColor, active); }
+	.btn-primary.active, .open > .btn-primary { .makeButton(#00a7b6, #0095a5, @white, active); }
+	.btn-success.active, .open > .btn-success { .makeButton(#76d668, #52ab46, @white, active); }
+	.btn-danger.active, .open > .btn-danger { .makeButton(#bf5656, #993636, @white, active); }
+	
+// Special-case Buttons
+.btn-text,
+.btn-text:hover,
+.btn-text:active {
+    font-weight: 400;
+    text-shadow: none;
+    border-color: transparent;
+    background: none;
+    .box-shadow(none);
+}
+
+.btn-text {
+    color: @linkColor;
+    &:hover {
+        color: @linkHoverColor;
+    }
+}
+
+.btn-clear {
+    background: fade(@white, 80%);
+    border-color: mix(@grayLight, @grayLighter);
+    .box-shadow(none);
+}
+
+.btn-clear:hover,
+.btn-clear:active,
+.open > .btn-clear {
+    background: @white;
+    border-color: mix(@grayLight, @grayLighter);
+    .box-shadow(none);
+}
+
+.btn-clear:active,
+.open > .btn-clear {
+    border-color: @grayLight;
+}

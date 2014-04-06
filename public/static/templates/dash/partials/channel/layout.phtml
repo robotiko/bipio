@@ -1,0 +1,371 @@
+<div id="loader-wrapper">
+  <div id="loader-container">
+    <div class="loader">
+      <div class="loader">
+        <div class="loader">
+          <div class="loader">
+            <div class="loader">
+              <div class="loader">
+                <div class="loader">
+                  <div class="loader">
+                    <div class="loader">
+                      <div class="loader">
+                        <div class="loader">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>loading...</h2>
+  </div>
+</div>
+
+<!-- pod representation template -->
+<script id="tpl-pod-entity" type="text/template">
+  <div class="span2 pod-select" data-pod="<%=name%>">
+    <div class="hub <%= (auth.status !== 'accepted' && auth.type != 'none') ? 'not-connected' : ''  %>">
+      <a href="#<%= (auth.status !== 'accepted' && auth.type != 'none') ? 'authModal' : 'newAction'  %>">
+        <img src="/static/img/channels/32/color/<%= name %>.png" alt="" class="hub-icon hub-icon-32" />
+        <strong class="name"><%= description %></strong>
+        <span class="note"><%= (auth.status !== 'accepted' && auth.type != 'none') ? 'Requires Activation' : 'Available'  %></span>
+      </a>
+    </div>
+  </div>
+</script>
+
+<script id="tpl-auth-issuer-token" type="text/template">
+  <form class="form-horizontal" style="margin-bottom:0px;padding-top:10px;">
+    <fieldset>
+      <% _.each(auth.authMap, function(issuerName, localName) { %>
+      <div class="control-group">
+        <label class="control-label" for="<%=localName%>"><%=issuerName%></label>
+        <div class="controls">
+          <input type="text" id="<%=localName%>" name="<%=localName%>" placeholder="<%=issuerName%>">
+          <span class="help-block"></span>
+        </div>
+      </div>
+      <% }); %>
+    </fieldset>
+  </form>
+</script>
+
+<!-- authentication modal -->
+<script id="tpl-modal-auth" type="text/template">
+
+  <div class="modal-overlay hide">
+    <div class="modal-container">
+      <div class="modal">
+        <header class="modal-header candy-strip">
+          <h2>Activating <%= description %></h2>
+          <img src="/static/img/channels/32/color/<%= name %>.png" alt="" class="hub-icon hub-icon-32" />
+        </header>
+        <div class="modal-body candy-strip">
+          <p>
+            Bipio needs authorization for your <%= description %> account before channels can be configured.  To
+            activate, <% if (auth.type == 'issuer_token') { %> you must supply <%= authEntities %> for <% } else { %>you will be redirected to <% } %>the <%= description %> website.
+          </p>
+
+          <% if (auth.type == 'issuer_token') { %>
+          <hr class="soften"/>
+          <form class="form-horizontal" style="margin-bottom:0px;padding-top:10px;">
+            <fieldset>
+              <% _.each(auth.authMap, function(issuerName, localName) { %>
+              <div class="control-group">
+                <label class="control-label" for="<%=localName%>"><%=issuerName%></label>
+                <div class="controls">
+                  <input type="text" id="<%=localName%>" name="<%=localName%>" placeholder="<%=issuerName%>">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+              <% }); %>
+            </fieldset>
+          </form>
+          <% } %>
+        </div>
+        <footer class="modal-footer">
+          <div class="btn-row">
+            <a class="btn modal-close" data-dismiss="modal" href="">Cancel</a>
+            <a class="btn modal-continue" href="">Continue Browsing</a>
+
+            <a data-model-id="<%= id %>" class="btn btn-success modal-authenticate " href="">Activate</a>
+
+            <% if (auth.type == 'oauth' && auth.scopes.length) { %>
+            <i data-toggle="popover" data-html="true" data-trigger="hover" data-title="Requesting Permissions For" 
+               data-placement="left" data-content="<strong><%= auth.scopes ? auth.scopes.join("<br/>") : '' %></strong>" class="icon-question-sign pull-right" style="font-size:32px;"></i>
+            <% } %>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</script>
+
+<script id="tpl-link-list-entity" type="text/template">
+  <li data-link="<%=_href%>">
+    <span><%=(img ? '<img class="mini" src="' + img + '" />' : '' )%> <%=description%> (<%=type%>)</span>
+    <span class="pull-right"><%=description_long%></span>
+  </li>
+</script>
+
+<!-- action select -->
+<script id="tpl-action-select" type="text/template">
+  <form class="create-new-channel">
+    <header>
+      <h2>
+        <% if (configure) { %>
+        <img src="/static/img/channels/32/color/<%= pod.name %>.png" alt="" class="hub-icon hub-icon-32" /> <%= (channel.id ? 'Editing - ' + channel.name : 'Configuring your new ' + pod.description + ' channel' ) %>
+        <% } else { %>
+        <img src="/static/img/channels/32/color/<%= pod.name %>.png" alt="" class="hub-icon hub-icon-32" /> Browsing <%= pod.description %> Actions
+        <% } %>
+      </h2>
+      <p class="alert alert-info">
+        <%= pod.description_long %>
+      </p>
+    </header>
+    <% if (configure) { %>
+
+    <% if (channel.id) { %>
+    <ul class="nav nav-tabs">
+      <div class="btn-group pull-right">
+        <% if (false && /^syndication/.test(channel.action)) { %>
+        <button type="button" data-action="create-share" class="btn btn-small btn-success create-trigger-action"><i class="icon-share"></i> Share Feed</button>
+        <% } %>
+        <% if (false && channel._emitter) { %>
+        <button type="button" data-action="create-trigger" class="btn btn-small btn-success create-trigger-action"><i class="icon-sitemap"></i> Create Trigger</button>
+        <% } %>
+      </div>
+
+      <li class="active"><a href="#setup" data-toggle="tab"><i class="icon-cogs"></i> Setup</a></li>
+      <% if (channel._renderers && Object.keys(channel._renderers).length > 0) { %>
+      <li><a href="#renderers" data-toggle="tab"><i class="icon-eye-open"></i> Renderers</a></li>
+      <% } %>
+      <li><a href="#channel_bips" data-toggle="tab"><i class="icon-sitemap"></i> Bips</a></li>
+      <!-- li><a href="#channel-authentication-panel" data-toggle="tab"><i class="icon-lock"></i> Authentication</a></li -->
+      <li><a href="#channel-data-panel" data-toggle="tab"><i class="icon-wrench"></i> Data View</a></li>
+      <li><a href="#channel-logs-panel" data-toggle="tab"><i class="icon-tasks"></i> Logs</a></li>
+    </ul>
+    <% } %>
+
+    <% if (channel.id) { %>
+    <div class="tab-content">
+      <div class="tab-pane active" id="setup">
+    <% } %>
+
+        
+    <% } %>
+
+        <fieldset class="select-action">
+          <% if (!channel.id) { %>
+          <% if (configure) { %>
+          <h3>What Should Your New Channel Do?</h3>
+          <% } else { %>
+          <h3>Available Actions and Emitters</h3>
+          <% } %>
+          <% } else { %>
+          <!-- h3>Action</h3 -->
+          <% }  %>
+
+          <ul class="action-list">
+            <div class="alert alert-warning">
+              <strong>Nothing left to do!</strong>
+              It looks like everything that could
+              possibly be installed for <%= pod.description %> has already been done.  When new channels become available, you'll know right away.
+            </div>
+          </ul>
+        </fieldset>
+
+        <% if (channel.id || configure) { %>
+          <% if (channel.app_id) {%>
+            <small class="pull-right">via <%=channel.app_id%></small>
+          <% } %>
+         <fieldset class="basic-info <%= (channel.id) ? '' : 'hidden' %>">
+           <div class="control-group">
+             <label class="control-label">Name</label>
+             <div class="controls">
+               <span class="help-block"></span>
+               <input type="text" id="channel_name" name="name" value="<%= channel.name %>"/>
+             </div>
+           </div>
+
+           <div class="control-group">
+             <label class="control-label">Description</label>
+             <div class="controls">
+               <span class="help-block"></span>
+               <textarea id="channel_note" name="note"><%= channel.note %></textarea>
+             </div>
+           </div>
+         </fieldset>
+       <% }  %>
+    
+    <% if (channel.id) { %>        
+      </div>
+      <% if (channel._renderers && Object.keys(channel._renderers).length > 0) { %>
+      <div class="tab-pane" id="renderers">
+        <p><i class="icon-exclamation-sign"></i> Retrieve stored content from this channel by invoking its renderer</p>
+        <ul class="link-list">
+          <% _.each(channel._renderers, function(r, name) { %>
+          <li data-cid="<%=channel.id%>" data-renderer="<%=name%>">
+            <%=r.description%> (<%=r.contentType%>)
+            <span class="pull-right"><%=r.description_long%></span>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+      <% } %>
+      <div class="tab-pane" id="channel_bips">
+        <h4>Your '<%= channel.name %>' Channel is in use by the following Bips</h4>
+        <div>
+          <ul id="channel_bip_list" class="link-list"></ul>
+        </div>
+      </div>
+      
+      <div class="tab-pane" id="channel-data-panel">
+        <p class="lead">Raw JSON Config</p>
+        <pre class="prettyprint">
+        </pre>
+      </div>
+      
+      
+      <div class="tab-pane" id="channel-logs-panel">
+        <table class="table table-condensed">
+          <thead>
+            <tr>              
+              <th>Message</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="log-body"></tbody>
+        </table>
+      </div>
+      
+      
+    </div>
+    <% } %>
+
+    <% if (configure) { %>
+    <div class="form-actions">
+      <!-- a  type="submit" class="btn btn-success save-channel <%= (channel.id) ? '' : 'disabled' %> hidden">Save Channel</a -->
+      <a  type="submit" class="btn btn-success save-channel <%= (channel.id) ? '' : 'hidden' %>">Save Channel</a>&nbsp;
+      <a href="#channels" type="button" class="btn cancel-channel">Cancel</a>
+      <% if (channel.id) { %>
+        <a data-toggle="modal" data-target="#channel-delete-dialog" href="#/channels" class="danger-link pull-right remove-channel">
+          <i class="icon-ban-circle"></i> Delete this channel
+        </a>      
+        <p class="note">Any changes made to this channel will take effect immediately upon saving.</p>
+      <% } %>
+      <div id="channel-delete-dialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header candy-strip">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2>Are you sure?</h2>
+        </div>
+        <div class="modal-body candy-strip">
+          All data associated with this Channel will be permanently removed
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button id="channel-delete-confirm" class="btn btn-danger">Continue</button>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <a href="#channels" type="button" class="btn cancel-channel">Cancel</a>
+    <% } %>
+  </form>
+</script>
+
+<!-- -->
+<script id="tpl-post-save-dialog" type="text/template">
+  <div id="channel-post-save-dialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header candy-strip">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h2><%=preamble%></h2>
+    </div>
+    <div class="modal-body candy-strip">
+      <%=body%>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Do Nothing</button>
+      <button id="channel-post-confirm" class="btn btn-primary">Continue</button>
+    </div>
+  </div>
+</script>
+
+<!-- action entity -->
+<script id="tpl-action-entity---" type="text/template">
+  <li class="action-selectable action <%= active_class %>">
+    <input class="action-selected" type="radio" id="action" name="action" value="<%= name %>" <%= ('' != active_class ? 'checked' : '')%> />
+           <h4><%= schema.description %> <span class="label action-type"><%= schema.trigger ? 'Emitter' : 'Action' %></span></h4>
+    <p class="description"><%= schema.description_long %></p>
+
+    <fieldset class="action-config">
+      <% _.each(schema.config.properties, function(config, idx) { %>
+      <div class="control-group">
+        <label class="label control-label"><%= config.description %></label>
+        <div class="controls">
+          <span class="help-block"></span>
+          <%= config._html %>
+        </div>
+      </div>
+      <% });%>
+    </fieldset>
+  </li>
+</script>
+
+<!-- pod list -->
+<script id="tpl-pod-select" type="text/template">
+  <div class="channel-cta">
+    <form>
+      <header>
+        <h2>Create a new Channel</h2>
+      </header>
+
+      <nav id="pod-list" class="hub-list row"></nav>
+    </form>
+  </div>
+</script>
+
+<!-- channel page layout -->
+<script id="tpl-layouts-channels" type="text/template">
+  <div id="channel-modal-container"></div>
+  <div id="channel-modal-post-container"></div>
+
+  <!-- NEW Channel Editor Page (Begin) -->
+  <div id="manage-channels">
+    <div class="row">
+      <header class="span10">
+        <h1>Channels <small style="font-size:16.5px;"> are re-usable components. Assemble them on <a href="#/bips">Bips</a> to create a message pipeline</small></h1>
+        <p class="lead"></p>
+      </header>
+    </div>
+    <div class="row">
+      <div class="span4 channel-list">
+        <section class="ag-list ag-list-channels">
+          <form class="form-search">
+            <input type="text" id="channel-search-form" placeholder="Search your configured channels..." />
+            <button type="submit"><i class="icon-search"></i></button>
+          </form>
+
+          <ul class="ag-list-results">
+            <span class="list-widget" id="channel-list-widget"></span>
+          </ul>
+
+          <nav class="ag-list-pagination channel-list-pagination"></nav>
+        </section>
+
+      </div>
+      <div class="span8" id="channel-setup"></div>
+    </div>
+  </div>
+
+
+  <!-- NEW Channel Editor Page (End) -->
+</script>
+
+<div id="authModal"></div>

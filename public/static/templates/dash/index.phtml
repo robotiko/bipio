@@ -1,0 +1,18 @@
+<link href="/static/css/select2.css" rel="stylesheet" type="text/css">
+
+<!-- generic templates -->
+
+<!-- pagination template -->
+<script id="tpl-pagination" type="text/template">
+    <p class="result-note">Displaying
+        <span class="current"><%= ((((page_current - 1) * page_size) + 1 ) + '-' + ((page_current * page_size))) %></span> of
+        <span class="total"><%= result_total%></span>
+    </p>
+    <ul class="pagination-pages">
+        <li class="prev"><a href="#" class="prev <%= (page_current > 1) ? '' : 'disabled' %>"><i class="icon-caret-left"></i></a></li>
+        <li class="next"><a href="#" class="next <%= (page_current < page_total) ? '' : 'disabled' %>"><i class="icon-caret-right"></i></a></li>
+    </ul>
+</script>
+
+<!-- dashboard content -->
+<div class="row" id="app-content"></div>

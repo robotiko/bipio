@@ -1,0 +1,24 @@
+<!-- channel list container -->
+<script id="tpl-resource-list-channel" type="text/template">
+  <header class="header-channel"></header>
+
+  <div id="list-channel-container">
+    <ul id="channel-list" class="ag-list-results list-channels"></ul>
+  </div>
+</script>
+
+<!-- list entity (model view) -->
+<script id="tpl-list-channel-entity" type="text/template">
+  <li>
+    <a class="<%=(_defocus === true ? 'defocused' : '')%>" href="#channels/<%= id %>">
+      <strong class="name"><%= name %></strong>
+      <small class="description"><%= note %></small>
+      <% if (config.icon && '' !== config.icon) { %>
+      <img src="<%= config.icon %>" alt="" class="hub-icon hub-icon-24" />
+      <img style="top:auto; bottom: 1rem;" src="/static/img/channels/32/color/<%=pod%>.png" alt="" class="hub-icon hub-icon-24" />
+      <% } else { %>
+      <img src="/static/img/channels/32/color/<%=pod%>.png" alt="" class="hub-icon hub-icon-24" />
+      <% } %>
+    </a>
+  </li>
+</script>

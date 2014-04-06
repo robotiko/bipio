@@ -1,0 +1,100 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 ie oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 ie oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 ie oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <base href="." target="_blank">
+
+    <title>BipIO - For People and Robots</title>
+
+    <link href="static/css/bip.css" rel="stylesheet" />
+    
+    <!-- link href="static/css/resizable.css" rel="stylesheet" />
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet" / -->
+
+    <script type="text/javascript">
+      var BIPClientParams = {
+        endpoint : ''
+      },
+      userSettings, userAuth;
+    </script>
+  </head>
+  <body>
+
+    <div class="navbar-fixed-top">
+      <div id="navbar">
+        <div class="container">
+          <div class="row">
+            <div class="span12">              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings"></div>    
+      <div id="page-body">
+        <div class="span7" id="signup-wrapper">
+        <div class="modal">
+          <header class="modal-header candy-strip">
+            <h2><img src="static/img/logo.png" /> <small>:: For People And Robots</small></h2>
+          </header>
+          <div class="modal-body candy-strip">
+            <form class="form-inline">
+              <fieldset>
+                <div class="help-block">
+                  <label>Username</label>
+                  <div class="control-group alertable">
+                    <input value="" type="text" maxlength="20" class="input-xlarge required" 
+                           id="login_username" name="login_username" minlength="5">
+                  </div>
+                </div>
+                <div class="help-block">
+                  <label>API Key</label>
+                  <div class="control-group alertable">
+                    <input type="text" class="input-xlarge required" id="login_password" name="login_password" value="">
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          
+          <div id="error-signup" class="alert alert-danger" 
+               style="text-align:center; -webkit-border-radius: 10px; border-radius: 10px;padding: 10px; display:none;">            
+            Login Failed
+          </div>
+          
+          <footer class="modal-footer">
+            <div class="btn-row">
+              <a id="sign-in-submit" data-loading-text="trying..." name="sign-in-submit" class="btn btn-warning">
+                <i class="icon-plus-sign icon-white"></i>
+                Login
+              </a>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      <div class="footer-container ">
+
+        <footer class="global">
+          <p class="copyright pull-left" style="text-align:center;">
+          <h3 class="pull-left" style="margin-bottom: 0px;margin-top: 5px;">
+            <a href="http://www.cloudspark.com.au">
+
+              <img style="height:32px;margin-top:-2px;" src="/static/img/cs_logo_cl.png" />
+              <small>Rapid Web Stacks Built Beautifully</small>
+            </a>
+            <small style="font-size:10px;">(c)2010-2014</small>
+          </h3>
+          </p>
+        </footer>
+      </div>
+    </div>
+  <script data-main="static/js/index-main" src="/static/js/vendor/require/require.js"></script>
+  </body>
+</html>

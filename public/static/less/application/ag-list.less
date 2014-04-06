@@ -1,0 +1,135 @@
+.ag-list {
+	.form-search {
+		position: relative;
+		margin-bottom: 1.4rem;
+		
+		input { 
+			width: 100%; 
+			padding-left: 1.2rem;
+			padding-right: 3.6rem;
+			margin: 0;
+			.border-radius(2rem);
+		}
+		
+		[type="submit"]{
+			.position(absolute, auto, .3rem, .8rem);
+			background: none;
+			border: none;
+			.box-shadow(none);
+			color: @grayLight;
+			&:hover { color: @gray; }
+		}
+	}
+	
+	.ag-list-results {
+		margin: 0;
+		.box-shadow(0 1px 3px fade(#c2cacc, 30%));
+		
+		li {
+			list-style: none;
+			margin: 0;
+		
+			a {
+				display: block;
+				position: relative;
+				border-bottom-width: 0;
+				padding: 1.5rem 1.5rem 1.5rem 5rem;
+				.box-shadow(0 1px 0 #f5fbfc inset);
+				border: 1px solid transparent;
+				.makeButton(#f5fbfc, #e6f0f2, @textLight);
+				
+				.name, .description { display: block; }
+				
+				.name {
+					font-size: 1.4rem;
+					font-weight: 700;
+					line-height: 2.4rem;
+					color: @textDark;
+				}
+				
+				.description, .expiry {
+					font-size: 1.1rem;
+					font-weight: 400;
+					line-height: 1.3em;
+					color: @textLight;
+				}
+				
+				img { 
+					.position(absolute, auto, 1.5rem, auto, auto, 1.5rem);
+				}
+				
+				.expiry {
+					margin: .3rem 0 0 0;
+					dt, dd { display: inline-block; }
+					dt { margin-right: .2rem; }
+					dd { margin-left: 0px; }
+				}
+			}
+			
+			&.active a { .makeButton(#f5fbfc, #e6f0f2, @textLight, active); }
+			
+			&:not(:last-child) a { border-bottom-width: 0; }
+		}
+	}
+	
+	.ag-list-pagination {
+		.clearfix;
+		margin-top: 1.4rem;
+		
+		.result-note {
+			font-size: 1.2rem;
+			font-weight: 700;
+			line-height: 1.8rem;
+			color: @grayLight;
+			float: left;
+			padding: 0;
+			margin: 0;
+		}
+		
+		ul {
+			float: right;
+			margin: 0;
+			
+			li { 
+				line-height: 1.8rem;
+				margin: 0;
+				display: inline-block;
+			}
+			
+			a { 
+				font-size: 1.8rem;
+				color: lighten(@grayLight, 15%);
+				display: inline-block;
+				position: relative;
+				top: -.2rem;
+				.square(1.8rem);
+				vertical-align: top;
+				text-align: center;
+				
+				&:hover { color: @grayLight; }
+				&.disabled { color: @grayLighter; }
+			}
+		}
+	}
+}
+
+.ag-list-horizontal {
+    .ag-list-results {
+        .clearfix;
+        
+        li {
+            width: 27.2rem;
+            float: left;
+            margin: 0 0 2.8rem 2.8rem;
+            
+            &:nth-child(3n - 2){
+                clear: left;
+                margin-left: 0;
+            }
+            
+            a {
+                border-bottom-width: 1px !important;
+            }
+        }
+    }
+}

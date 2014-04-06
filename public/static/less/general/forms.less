@@ -1,0 +1,71 @@
+fieldset { margin: 2.4rem 0; }
+
+input[type="text"],
+input[type="username"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+.field,
+textarea {
+	font-size: 1.4rem;
+	line-height: 1.3em;
+	width: 50%;
+	height: auto;
+	padding: .5em .75em;
+	/*margin-bottom: 3rem;*/
+	background: #fbfbfb;
+	border: 1px solid #b4c9cc;
+	.border-radius(5px);
+	.box-shadow(0 1px 2px fade(@black, 5%));
+}
+
+textarea {
+	width: 100%;
+	height: 8em;
+}
+
+label {
+	font-size: 1.4rem;
+	font-weight: 700;
+	line-height: 1.3em;
+	margin-bottom: .25em;
+	
+	&.checkbox, &.radio { font-weight: 400; }
+}
+
+.datepicker-input {
+	position: relative;
+	z-index: 0;
+	
+	input { padding-left: 3.2rem; }
+	
+	&:before {
+		content: "";
+		display: block;
+		cursor: pointer;
+		.size(16px, 14px);
+		.position(absolute, 1, .8rem, auto, auto, 1.1rem);
+		background: url('@{imgURL}/icon-datepicker.png') no-repeat center;
+	}
+}
+
+.input-append .add-on, .input-prepend .add-on {
+	height: 34px;
+	padding: 6px 8px; 
+}
+
+.form-actions {
+	background: url('../img/hr.png') repeat-x top;
+	padding: 3.2rem 0;
+	border: none;
+	
+	.note {
+		color: @grayLight;
+		margin: 1em 0 0 0;
+	}
+	
+	a:not(.btn){ margin-top: .9rem; }
+}
