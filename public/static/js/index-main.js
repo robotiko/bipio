@@ -23,18 +23,8 @@ require.config({
 
     medium : 'vendor/medium-editor',
 
-    // master (context) collections
-    c_domain : 'collections/domain/c_domain_all',
-    c_channel : 'collections/channel/c_channel_all',
-    c_channel_bip_list : 'collections/channel/c_channel_bip_list',
     c_mount_local : 'collections/mount/c_mount_local',
-    c_bip : 'collections/bip/c_bip_all',
-    c_bip_desc : 'collections/bip/c_bip_descriptions',
-    c_bip_share : 'collections/bip/c_bip_share',
-    c_bip_log : 'collections/bip/c_bip_log',
-    c_channel_log : 'collections/channel/c_channel_log',
-    c_pod : 'collections/channel/c_pod_all',
-    c_feed : 'collections/feed/c_feed_all'
+
   },
   shim : {
     "backbone": {

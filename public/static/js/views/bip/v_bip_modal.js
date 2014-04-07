@@ -247,7 +247,7 @@ define([
       },
 
       renderShared : function(struct) {
-        struct.domain_id = userSettings.bip_domain_id;
+        struct.domain_id = BipClient.getUserSettings().bip_domain_id;
         this.model = BipClient.getCollection('bip').factory(struct);
         this._setupValidation();
         this._renderBip(true);
@@ -292,7 +292,7 @@ define([
         // create bip with default settings
         var data = {
           type : mode,
-          domain_id : userSettings.bip_domain_id
+          domain_id : BipClient.getUserSettings().bip_domain_id
         };
         this.model = BipClient.getCollection('bip').factoryDefault(data);
         this._renderBip();
@@ -319,12 +319,12 @@ define([
 
         // apply end_life account default
         if (dict.isNew) {
-          dict.end_life = _.clone(userSettings.bip_end_life);
+          dict.end_life = _.clone(BipClient.getUserSettings().bip_end_life);
         }
 
         // apply default behavior if none set
         if (!dict.end_life.action || '' === dict.end_life.action) {
-          dict.end_life.action = userSettings.bip_expire_behaviour;
+          dict.end_life.action = BipClient.getUserSettings().bip_expire_behaviour;
         }
 
         dict.rendererChannels = {};
@@ -360,7 +360,7 @@ define([
         }
 
         dict.explicitDate = false;
-        dict.time_zone = userSettings.timezone;
+        dict.time_zone = BipClient.getUserSettings().timezone;
 
         dict.expiry_time_period = '';
         if (endLife.time != 0 && endLife.time != '') {

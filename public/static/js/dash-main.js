@@ -3,7 +3,6 @@ require.config({
   paths: {
     jquery: 'vendor/jquery/jquery-min',
     jquery_b64 : 'vendor/jquery/jquery.base64.min',
-    //bootstrap : 'vendor/bootstrap/bootstrap-bundle.min',
     bootstrap : 'vendor/bootstrap/bootstrap-bundle',
     'bootstrap.templar' : 'vendor/bootstrap/bootstrap-templar',
     moment : 'vendor/moment.min',
@@ -34,8 +33,7 @@ require.config({
     c_bip_share : 'collections/bip/c_bip_share',
     c_bip_log : 'collections/bip/c_bip_log',
     c_channel_log : 'collections/channel/c_channel_log',
-    c_pod : 'collections/channel/c_pod_all',
-    c_feed : 'collections/feed/c_feed_all'
+    c_pod : 'collections/channel/c_pod_all'
   },
   shim : {
     "backbone": {
@@ -82,7 +80,6 @@ require.config({
 require([
   'underscore',
   'backbone',
-  'dash',
   'bipclient',
   'c_domain',
   'c_channel',
@@ -91,19 +88,16 @@ require([
   'c_bip_desc',
   'c_bip_share',
   'c_mount_local',
-  'c_feed',
   'backbone.validator',
   'bootstrap',
   'moment',
-  //'momenttz',
-  //'momenttzdata',
   'medium',
   'select2',
   'templar',
   'hopscotch'
-  ], function(_, Backbone, Dash, BipClient, DomainCollection,
+  ], function(_, Backbone, BipClient, DomainCollection,
     ChannelCollection, PodCollection, BipCollection, BipDescCollection,
-    BipShareCollection, MountLocalCollection, FeedCollection){
+    BipShareCollection, MountLocalCollection){
 
     _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
 
@@ -127,20 +121,10 @@ require([
 
     var c_mounts = new MountLocalCollection();
 
-    var c_feed = new FeedCollection();
-    BipClient.setCollection('feed', c_feed);
-
     var retries = 0, timer;
 
-    function retry() {
-      retries++;
-      if (retries > 5) {
-        window.location = '/timeout';
-      } else {
-        setTimeout(function() {
-          init();
-        }, 2000);
-      }
+    function fetchLayout(layoutPath) {
+      return $.get('/static/templates/dash/' + layoutPath);
     }
 
     function bootstrap() {
@@ -162,41 +146,63 @@ require([
         }
         )
       ).done(
-        function(){
-          Dash.initialize();
+        function() {
+          // load templates
+          var templates = [
+            'index.html',
+            'partials/channel/layout.html',
+            'partials/bip/layout.html'
+          ];
+
+          var deferred = [];
+
+          for (var i = 0; i < templates.length; i++) {
+            deferred.push(fetchLayout(templates[i]));
+          }
+
+          var $container = $('#page-body .container');
+          $.when.apply(this, deferred).then(function() {
+            var arg;
+            for (var i = 0; i < arguments.length; i++) {
+              arg = arguments[i];
+              if ('success' === arg[1]) {
+                $container.append($(arg[0]));
+              }
+            }
+          console.log(arguments);
+          
+          require(['dash-router'], function(Router) {
+            Router.initialize();
+          });
+          
+          //debugger;
+            //DashRouter.initialize();
+          });
         }
       );
 
-      // only need channels to bootstrap
-      // so load everything else here.
       c_bip.fetch({ reset : true });
       c_bip_desc.fetch({ reset : true });
       c_bip_share.fetch( { reset : true });
-      c_feed.fetch();
     }
 
     function init() {
-      BipClient.init().then(function() {
-        c_mounts.fetch({
-          success : function(collection, models) {
-            var model = collection.where({
-              active : true
-            }).shift();
+      c_mounts.fetch({
+        success : function(collection, models) {
+          var model = collection.where({
+            active : true
+          }).shift();
 
-            if (model) {
-              BipClient.setCredentials(
-                model.get('username'),
-                model.get('token'),
-                model.get('url')
-                );
-            }
-            bootstrap();
+          if (model) {
+            BipClient.setCredentials(
+              model.get('username'),
+              model.get('token'),
+              model.get('url')
+              );
           }
-        });
-      },
-      function() {
-        retry();
-      });
+          bootstrap();
+        }
+      });      
     }
 
     init();

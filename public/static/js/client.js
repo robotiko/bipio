@@ -59,20 +59,28 @@ define([
       _token : undefined,
       _mounted : false,
       
+      _userSettings : null,
+      
       login : function(username, password, next) {        
+        var self = this;
         this.setCredentials(username, password);
         this._request(
           null,
           BIPClient.getEndpoint() + '/login',
           'GET',
-          function(resData, payload) {
-            next(false, resData);
+          function(payload) {
+            self._userSettings = payload;
+            next(false, payload);
           },
           function(xhr_status, status, errText, payload) {
             next(true, errText);
           },
           true
           );
+      },
+      
+      getUserSettings : function() {
+        return this._userSettings;
       },
       
       setCollection: function(target, collection) {
@@ -135,8 +143,8 @@ define([
       },
 
       init: function(clientParams) {
-        var self = this,
-        deferred = $.Deferred();
+        var self = this;
+
         this._params = clientParams;
 
         this.authStatusChangeEvent = new ClientEvent('auth_status');
@@ -153,8 +161,6 @@ define([
             }
           }
         );
-       
-        return deferred;
       },
 
       // lots of weird oatuh vectors, subscribe to the newsletter.

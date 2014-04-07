@@ -87,6 +87,7 @@ define([
       },
 
       defaults: function() {
+        var userSettings = BipClient.getUserSettings();
         return {
           'id' : null,
           'name' : '',

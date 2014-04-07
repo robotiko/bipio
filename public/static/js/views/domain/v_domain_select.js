@@ -15,7 +15,7 @@ define([
             render: function(){
                 var id = this.model.get('id');
                 $(this.el).attr('value', id).html(this.model.get('name'));
-                if (userSettings.default_domain == id) {
+                if (BipClient.getUserSettings().default_domain == id) {
                     $(this.el).attr('selected', 'selected');
                 }
                 return this;
