@@ -1,7 +1,7 @@
 require.config({
   baseUrl : "/static/js",
   paths: {
-    jquery: 'vendor/jquery/jquery-min',
+    jquery: 'vendor/jquery/jquery-1.11.0',
     jquery_b64 : 'vendor/jquery/jquery.base64.min',
     bootstrap : 'vendor/bootstrap/bootstrap-bundle',
     'bootstrap.templar' : 'vendor/bootstrap/bootstrap-templar',

@@ -5,11 +5,29 @@ define([
   'views/bip/v_bip_modal',
   'views/channel/v_channel_list',
   'views/channel/v_channel_pod_list',
-  'views/outbox/v_outbox',
   'bipclient',
   'moment'
-  ], function(_, Backbone, BipListView, BipModalView, ChannelListView, PodListView, OutboxView, BipClient) {
-    var AppRouter = Backbone.Router.extend({
+  ], function(_, Backbone, BipListView, BipModalView, ChannelListView, PodListView, BipClient) {
+    
+    var currentView,
+      mailChannels = BipClient.getCollection('channel').where({ action : 'email.smtp_forward'}),
+      containerWidth = $('#page-body .container').width(),
+      appContent = $('#app-content'),
+      markAction = function(action) {
+        $("[id^=init-]").removeClass('active');
+        $('#init-' + action).addClass('active');
+      },    
+      initLayout = function(action, params) {
+        var tplHTML = _.template($('#tpl-layouts-' + action).html());
+        appContent.html(tplHTML(params || {}));
+      },
+      destroyView = function() {
+        if (currentView && currentView.shutdown) {
+          currentView.shutdown();
+        }
+      },      
+      app_router,
+      AppRouter = Backbone.Router.extend({
       routes: {
         // Default
         'bips' : 'bipRender',
@@ -20,45 +38,9 @@ define([
         'channels' : 'channelRender',
         'channels/:id' : 'channelRender',
 
-        'outbox' : 'outboxRender',
         '*actions': 'channelRender'
-      }
-    });
-
-    var app_router,
-      currentView;
-
-
-    var initialize = function() {
-      
-      $('#loader-wrapper').fadeOut(function() {
-        $(this).remove();
-      });
-
-      app_router = new AppRouter;
-
-      var mailChannels = BipClient.getCollection('channel').where({ action : 'email.smtp_forward'});
-
-      var containerWidth = $('#page-body .container').width();
-
-      var appContent = $('#app-content');
-      var markAction = function(action) {
-        $("[id^=init-]").removeClass('active');
-        $('#init-' + action).addClass('active');
-      }
-
-      var initLayout = function(action, params) {
-        var tplHTML = _.template($('#tpl-layouts-' + action).html());
-        appContent.html(tplHTML(params || {}));
-      }
-
-      var destroyView = function() {
-        if (currentView && currentView.shutdown) {
-          currentView.shutdown();
-        }
-      }
-
-      app_router.on('route:bipRender', function (id, mode, childId) {
+      },
+      bipRender : function (id, mode, childId) {
         destroyView();
         
         $('#page-body .container').removeAttr('style');
@@ -73,25 +55,8 @@ define([
         var bipListView = new BipListView(appContent, app_router);
         bipListView.render(id, mode, childId);
         currentView = bipListView;
-      });
-
-      app_router.on('route:outboxRender', function (id, mode, childId) {
-        destroyView();
-        
-        $('#page-body .container').removeAttr('style');
-        // set explicit action for this default route
-        var action = 'outbox';
-
-        initLayout(action);
-        markAction(action);
-
-        var outboxView = new OutboxView(appContent, app_router);
-        outboxView.render();
-        
-        currentView = outboxView;
-      });
-
-      app_router.on('route:channelRender', function (id) {
+      },
+      channelRender : function (id) {
         destroyView();
         
         $('#page-body .container').removeAttr('style');
@@ -124,27 +89,25 @@ define([
         currentView = channelsView;
         
         podsView.render(id);
+      }
+    });
+    
+    app_router = new AppRouter();
+    
+    Backbone.history.start();
+    
+    // global config tray
+    $('#app-settings-container').on('click', function() {
+      var pb = $('body');
+      if (!pb.hasClass('tray-open')) {
+        pb.addClass('tray-open');
+      } else {
+        pb.removeClass('tray-open');
+      }
+    });
+    
+    $('#loader-wrapper').fadeOut(function() {
+      $(this).remove();
+    });
 
-      });
-
-      Backbone.history.start();
-     
-      app_router.navigate('channels', {
-        trigger : true
-      } );
-     
-      // global config tray
-      $('#app-settings-container').on('click', function() {
-        var pb = $('body');
-        if (!pb.hasClass('tray-open')) {
-          pb.addClass('tray-open');
-        } else {
-          pb.removeClass('tray-open');
-        }
-      });
-    };
-
-    return {
-      initialize: initialize
-    };
   });

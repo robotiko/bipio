@@ -1,28 +1,6 @@
 require.config({
   baseUrl : "/static/js",
   paths: {
-    jquery: 'vendor/jquery/jquery-min',
-    jquery_b64 : 'vendor/jquery/jquery.base64.min',
-    bootstrap : 'vendor/bootstrap/bootstrap-bundle',
-    'bootstrap.templar' : 'vendor/bootstrap/bootstrap-templar',
-    moment : 'vendor/moment.min',
-    momenttz : 'vendor/moment-timezone.min',
-    momenttzdata : 'vendor/moment-timezone-data',
-    underscore: 'vendor/underscore/underscore-min',
-    backbone: 'vendor/backbone/backbone-min',
-    sessionstorage: "vendor/backbone/backbone.sessionStorage",
-    'backbone.validator' : 'vendor/backbone/backbone-validation-amd-min',
-    'd3' : 'vendor/d3/d3.min',
-    'select2' : 'vendor/select2',
-    'templar' : 'vendor/templar',
-    'hopscotch' : 'vendor/hopscotch-0.1.2',
-
-    bipclient: 'client',
-
-    isotope : 'vendor/jquery.isotope.min',
-
-    medium : 'vendor/medium-editor',
-
     // master (context) collections
     c_domain : 'collections/domain/c_domain_all',
     c_channel : 'collections/channel/c_channel_all',
@@ -70,9 +48,6 @@ require.config({
     },
     "templar" : {
       deps : [ "jquery" ]
-    },
-    "hopscotch" : {
-      deps : [ "jquery" ]
     }
   }
 });
@@ -94,7 +69,6 @@ require([
   'medium',
   'select2',
   'templar',
-  'hopscotch'
   ], function(_, Backbone, BipClient, DomainCollection,
     ChannelCollection, PodCollection, BipCollection, BipDescCollection,
     BipShareCollection, MountLocalCollection){
@@ -169,14 +143,9 @@ require([
                 $container.append($(arg[0]));
               }
             }
-          console.log(arguments);
-          
-          require(['dash-router'], function(Router) {
-            Router.initialize();
-          });
-          
-          //debugger;
-            //DashRouter.initialize();
+
+            require([ 'dash-router' ]);
+
           });
         }
       );
@@ -186,7 +155,7 @@ require([
       c_bip_share.fetch( { reset : true });
     }
 
-    function init() {
+    function initialize() {
       c_mounts.fetch({
         success : function(collection, models) {
           var model = collection.where({
@@ -205,5 +174,5 @@ require([
       });      
     }
 
-    init();
+    initialize();    
   });

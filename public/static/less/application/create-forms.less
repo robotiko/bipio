@@ -53,7 +53,15 @@ form fieldset {
 			}
 			
 			&:hover {
-				h4, p, label { color: @textColor; }
+        background: #d9faff;
+        border: 1px solid #b4c9cc;
+        -webkit-box-shadow: 0 0 0.5rem #a6e6f0;
+        -moz-box-shadow: 0 0 0.5rem #a6e6f0;
+        box-shadow: 0 0 0.5rem #a6e6f0;        
+				h4, p, label { 
+          color: @textColor; 
+          cursor: pointer;
+        }
 			}
 			
 			&.active { 

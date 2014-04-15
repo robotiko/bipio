@@ -53,18 +53,33 @@
 			}
 		}
 		
-		.user-avatar { .square(20px); }
+		.user-avatar { 
+      .square(20px); 
+      -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0px 3px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+    }
 	}
 }
+
+
+
 
 #subnavbar {
 	text-align: center;
 	
 	.container {
+    background: #a6e6f0;
 		background: rgba(166,230,240, 0.9);
 		padding: 1.3rem 1.6rem;
 		.border-radius(0 0 1.5rem 1.5rem);
 	}
+
+  h1 {
+    font-size: 1.8rem;
+    float:left;
+    margin: 0px;
+  }
 	
 	h2, .manage-links, .manage-links li, .notifications { display: inline-block; }
 	
@@ -95,10 +110,13 @@
 	}
 	
 	.notifications {
-		width: 12rem;
+		width: inherit;
+    margin-right: 10px;
 		margin-top: .1rem;
 		
 		.dropdown {
+      text-align:left;
+      padding-left: 10px;
 			> a {
 				font-size: 1.1rem;
 				font-weight: 900;
@@ -139,6 +157,29 @@
 			}
 		}
 	}
+}
+
+#subnavbar .dropdown ul.docs-menu {
+  width: inherit;
+  padding: 0px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-box-shadow: 0px 1px 10px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 10px 2px rgba(0, 0, 0, 0.15);
+  background: rgba(239,247,249, 0.75);
+}
+
+#subnavbar .manage-links .docs-menu li {
+  width: 160px;
+  padding-top: 2px;
+}
+
+
+#subnavbar .dropdown ul.docs-menu li a {
+  padding-left: 10px;
+  color: #a6e6f0;
+  text-transform: none;
+  text-align: left;
 }
 
 #sign-in {
@@ -194,4 +235,8 @@
 			margin-bottom: 1.8rem;
 		}
 	}
+}
+
+#nav-menu-items i {
+  display: none;
 }

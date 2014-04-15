@@ -40,7 +40,7 @@ define([
       _selectionState : {
         link : null, // d3 node
         node : null // d3 link
-      },
+    },
       _svg : null,
       _forceLayout : null,
       _link : null,
@@ -994,10 +994,10 @@ define([
 
               props = action.imports.properties;
               buildTransforms = function(error, transforms) {
-                var templateStr, 
-                  // regex esca[e
-                  txFromRegExp = new RegExp(txFrom.replace('.', '\\.'), 'g');
-                    
+                var templateStr,
+                // regex esca[e
+                txFromRegExp = new RegExp(txFrom.replace('.', '\\.'), 'g');
+
                 transforms = transforms || [];
 
                 for (var key in transforms) {
